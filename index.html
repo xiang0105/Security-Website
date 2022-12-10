@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>全台資安防護網</title>
+	<link rel="shortcut icon" href="./img/ico.ico">
+	<!-- Bootstrap -->
+	<link href="css/bootstrap-4.4.1.css" rel="stylesheet">
+	<link rel="stylesheet" href="./css/style.css">
+	<script src="./js/index.js" defer type="module"></script>
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css">
+</head>
+
+<body>
+	<!-- body code goes here -->
+
+
+	<div id="app">
+		<nav id="navbar" class="navbar fixed-top navbar-expand-lg navbar-dark"> <a class="navbar-brand d-md-none"
+				href="#top"><img src="./img/logo.png" alt=""></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent1"
+				aria-controls="navbarSupportedContent1" aria-expanded="false" aria-label="Toggle navigation"> <span
+					class="navbar-toggler-icon"></span> </button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent1">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item active"> <a class="nav-link" href="#about">關於我們</a> </li>
+					<li class="nav-item active"> <a class="nav-link" href="#information">資安健檢</a> </li>
+					<li class="nav-item active"> <a class="nav-link" href="#services">服務資訊</a> </li>
+					<li class="nav-item active"> <a class="nav-link" href="#contact">聯絡我們</a> </li>
+				</ul>
+				<a class="navbar-brand d-md-block d-none" href="#top"><img src="./img/logo.png" alt=""></a>
+				<div class="ml-auto d-flex">
+					<a class="btn" href="#top"><i class="fas fa-home"></i></a>
+					<a class="btn" @click="$$('#login').modal()"><i class="fas fa-user"></i></a>
+					<a class="btn" Onclick="window.open('index.html','','height=800,width=450')"><i
+							class="fas fa-mobile-screen-button"></i></a>
+					<form class="input-group d-flex" @submit.prevent="$$('#search').modal()">
+						<input class="form-control mr-2" type="search" placeholder="搜尋關鍵字" aria-label="Search"
+							v-model="search_text">
+						<button class="btn btn-outline-warning" type="submit"><i class="fas fa-search"></i></button>
+					</form>
+				</div>
+			</div>
+		</nav>
+		<section id="home">
+			<div id="carouselExampleIndicators1" class="carousel slide carousel-fade" data-ride="carousel">
+				<div class="carousel-inner" role="listbox">
+					<div class="carousel-item active" style="background-image: url(./img/101.png)"></div>
+					<div class="carousel-item" style="background-image: url(./img/102.png)"></div>
+					<div class="carousel-item" style="background-image: url(./img/103.png)"></div>
+				</div>
+			</div>
+			<div class="container-fluid h-100">
+				<div class="row h-100">
+					<div class="col-sm-4 hidden">
+						<h3>根據本網站調查全台<br>發生投資詐騙</h3>
+						<h4>共<span class="text-warning fa-2x">{{data1}}</span>件</h4>
+					</div>
+					<div class="col-sm-4 hidden3">
+						<img src="./img/log.png" alt="" class="d-none d-md-block">
+						<h1 class="d-md-none">全台資安防護網</h1>
+						<form class="input-group d-flex" @submit.prevent="$$('#search').modal()">
+							<input class="form-control mr-2" type="search" placeholder="搜尋關鍵字" aria-label="Search"
+								v-model="search_text">
+							<button class="btn btn-outline-warning rounded-pill border-0" type="submit"><i
+									class="fas fa-search"></i></button>
+						</form>
+					</div>
+					<div class="col-sm-4 hidden2">
+						<h3>根據本網站調查警察<br>成功攔阻的詐騙案件</h3>
+						<h4>共<span class="text-warning fa-2x">{{data2}}</span>件</h4>
+					</div>
+				</div>
+			</div>
+		</section>
+		<section id="about">
+			<div class="top hidden3 my-5">
+				<h1>關於我們</h1>
+				<hr style="border: #000 solid .5px;width: 200px;margin: 0">
+				<h3>ABOUT</h3>
+			</div>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-2"></div>
+					<div class="col-sm-4">
+						<h3 class="hidden">{{about[about_id].title}}</h3><br>
+						<div class="hidden">
+							<button class="btn btn-danger m-1" @click="about_id = 0">{{about[0].title}}</button>
+							<button class="btn btn-danger m-1" @click="about_id = 1">{{about[1].title}}</button>
+							<button class="btn btn-danger m-1" @click="about_id = 2">{{about[2].title}}</button>
+						</div><br>
+						<p class="hidden content">{{about[about_id].content}}</p>
+					</div>
+					<div class="col-sm-4">
+						<div id="accordion1" role="tablist">
+							<div class="card mb-3 hidden2">
+								<a data-toggle="collapse" class="card-header" href="#collapseOne1" role="button"
+									aria-expanded="true" aria-controls="collapseOne1">
+									<h5><i class="fas fa-plus mr-2"></i>如何避免被詐騙? </h5>
+								</a>
+								<div id="collapseOne1" class="collapse show" role="tabpanel"
+									aria-labelledby="headingOne1" data-parent="#accordion1">
+									<div class="card-body">
+										<p>法院或警察機關辦案，不會收取當事人現金、亦不會要求匯款；法院或警察機關不會監管當事人帳戶；法院不會用傳真方式，將傳喚書送給當事人，一定會以掛號信函送達；公家機關絕對不會以電話、電話錄音或以簡訊通知用戶轉帳，或要打電話與某單位聯繫。
+										</p><img src="./img/201.png" alt="">
+									</div>
+								</div>
+							</div>
+							<div class="card mb-3 hidden2">
+								<a class="collapsed card-header" data-toggle="collapse" href="#collapseTwo1"
+									role="button" aria-expanded="false" aria-controls="collapseTwo1">
+									<h5><i class="fas fa-plus mr-2"></i>拍賣詐騙預防策略</h5>
+								</a>
+								<div id="collapseTwo1" class="collapse" role="tabpanel" aria-labelledby="headingTwo1"
+									data-parent="#accordion1">
+									<div class="card-body">
+										<p>千萬不要聽信任何人（包含賣家或銀行人員）以「解除ATM設定」、「誤刷條碼」、「誤設訂單」、「重複扣款」、「至ATM操作資料整理」、「開啟網路購物的個資啟用權限」、「超商購My
+											Card點數卡、比特幣」為游去ATM修正設定或是到超商購買遊戲點數，這絕對是詐騙！若有疑慮請撥165專線查證，勿聽信來電電話。</p><img
+											src="./img/202.png" alt="">
+									</div>
+								</div>
+							</div>
+							<div class="card mb-3 hidden2">
+								<a class="collapsed card-header" data-toggle="collapse" href="#collapseThree1"
+									role="button" aria-expanded="false" aria-controls="collapseThree1">
+									<h5><i class="fas fa-plus mr-2"></i>假冒銀行詐騙預防策略</h5>
+								</a>
+								<div id="collapseThree1" class="collapse" role="tabpanel"
+									aria-labelledby="headingThree1" data-parent="#accordion1">
+									<div class="card-body">
+										<p>銀行簡訊內容中皆不會留存任何電話號碼，銀行客戶服務電話皆註記於金融卡、信用卡或存摺背面；接獲簡訊，請勿依該顯示號碼回覆電話，若有任何疑問，請先撥打銀行客服電話與客服人員聯絡求證，或撥打警方防制詐騙專線（直撥165）加以確認，以免成為歹徒詐騙之對象。
+										</p><img src="./img/203.png" alt="">
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-2"></div>
+				</div>
+			</div>
+		</section>
+		<section id="information">
+			<div class="top hidden3 my-5">
+				<h1>資安健檢</h1>
+				<hr style="border: #000 solid .5px;width: 200px;margin: 0">
+				<h3>INFORMATION</h3>
+			</div>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-1"></div>
+					<div class="col-sm-2 text-md-left">
+						<div class="hidden mb-5">
+							<h3>投資詐騙排行</h3>
+							<hr>
+							<p class="text-center text-md-left">前3⼤類型依序為「網路賭博」、「虛擬資產詐騙」及「境外⾦融資產投資」</p>
+							<button class="btn btn-success" @click="turn();chart_id = 0">MORE</button>
+						</div>
+						<div class="hidden mb-5">
+							<h3>投資詐騙數量</h3>
+							<hr>
+							<p class="text-center text-md-left">2021年全年投資詐騙案件達4904件，較2020年增加2052件</p>
+							<button class="btn btn-success" @click="turn();chart_id = 1">MORE</button>
+						</div>
+						<div class="hidden mb-5">
+							<h3>損失貨幣金額</h3>
+							<hr>
+							<p class="text-center text-md-left">投資詐騙⾦額(財損)，也從前年的10.27億元⼤幅增加⾄去年20.83億元</p>
+							<button class="btn btn-success" @click="turn();chart_id = 2">MORE</button>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<img src="./img/turn.png" alt="" id="turn">
+						<img :src="chart[chart_id]" alt="" class="chart">
+					</div>
+					<div class="col-sm-2 text-md-right">
+						<div class="hidden2 mb-5">
+							<h3>詐騙訊息比重</h3>
+							<hr>
+							<p class="text-center text-md-right">據調查顯示簡訊通常每100則有17.5封為詐騙簡訊:而電話則是100則有4.4通</p>
+							<button class="btn btn-success" @click="turn();chart_id = 3">MORE</button>
+						</div>
+						<div class="hidden2 mb-5">
+							<h3>常見詐騙話語</h3>
+							<hr>
+							<p class="text-center text-md-right">據調查顯示2021年統計全台收到詐騙電話的理由通常為股票投資詐騙</p>
+							<button class="btn btn-success" @click="turn();chart_id = 4">MORE</button>
+						</div>
+						<div class="hidden2 mb-5">
+							<h3>詐騙成長趨勢</h3>
+							<hr>
+							<p class="text-center text-md-right">去年國內「投資詐騙」發⽣案件⾼達4902件，較前年（2020）的2852件</p>
+							<button class="btn btn-success" @click="turn();chart_id = 5">MORE</button>
+						</div>
+					</div>
+					<div class="col-sm-1"></div>
+				</div>
+			</div>
+		</section>
+		<section id="services">
+			<div class="top hidden3 my-5">
+				<h1>服務資訊</h1>
+				<hr style="border: #fff solid .5px;width: 200px;margin: 0">
+				<h3>SERVICES</h3>
+			</div>
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-1"></div>
+					<div class="col-sm-2 text-md-left d-md-block d-none">
+						<div class="hidden mb-5">
+							<h3><i class="fas fa-shield-virus fa-2x text-danger"></i>電話詐欺</h3>
+							<hr>
+							<p class="text-center text-md-left">主要係指犯罪者利⽤電話連繫被害⼈，謊稱被害⼈已中⼤獎等⽅式詐騙被害⼈</p>
+							<b>請參考 <span class="text-danger" @click="slide_id = 0">Protection</span></b>
+						</div>
+						<div class="hidden mb-5">
+							<h3><i class="fas fa-shield-virus fa-2x text-success"></i>網路詐欺</h3>
+							<hr>
+							<p class="text-center text-md-left">許多⼈陸續開始進⾏網路購物，因此犯罪者便利⽤這⼀點騙取⺠眾財產</p>
+							<b>請參考 <span class="text-success" @click="slide_id = 1">Security</span></b>
+						</div>
+						<div class="hidden mb-5">
+							<h3><i class="fas fa-shield-virus fa-2x text-info"></i>假冒名義</h3>
+							<hr>
+							<p class="text-center text-md-left">係指犯罪者假冒公務機關等⾝份威脅被害⼈，讓被害⼈不敢反抗</p>
+							<b>請參考 <span class="text-info" @click="slide_id = 2">Firewall</span></b>
+						</div>
+					</div>
+					<div class="col-sm-6">
+						<div class="slide">
+							<div class="slide-control">
+								<div class="slide-prev" @click="slide_id = slide_id == 0 ? 2 : slide_id - 1"><i
+										class="fas fa-caret-left"></i></div>
+								<div class="slide-next" @click="slide_id = slide_id == 2 ? 0 : slide_id + 1"><i
+										class="fas fa-caret-right"></i></div>
+							</div>
+							<div class="slide-container">
+								<div class="slide-project"
+									:class="(index === slide_id && 'show') || ((index + 1) % 3 === slide_id && 'prev') || ((index + 2 ) % 3 === slide_id && 'next')"
+									v-for="i , index in slide">
+									<div class="slide-header">
+										<i class="fas" :class="i.icon , i.class"></i>
+										<h1>{{i.title}}</h1>
+										<h3 :class="i.color">{{i.english}}</h3>
+									</div>
+									<div class="slide-body">
+										<div v-for="item in i.items">{{item}}</div>
+									</div>
+									<div class="slide-footer">
+										<button class="btn" :class="i.class" @click="toggle(index)">{{i.btn}}</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="col-sm-2 text-md-left d-md-none">
+						<div class="hidden mb-5">
+							<h3><i class="fas fa-shield-virus fa-2x text-danger"></i>電話詐欺</h3>
+							<hr>
+							<p class="text-center text-md-left">主要係指犯罪者利⽤電話連繫被害⼈，謊稱被害⼈已中⼤獎等⽅式詐騙被害⼈</p>
+							<b>請參考 <span class="text-danger" @click="slide_id = 0">Protection</span></b>
+						</div>
+						<div class="hidden mb-5">
+							<h3><i class="fas fa-shield-virus fa-2x text-success"></i>網路詐欺</h3>
+							<hr>
+							<p class="text-center text-md-left">許多⼈陸續開始進⾏網路購物，因此犯罪者便利⽤這⼀點騙取⺠眾財產</p>
+							<b>請參考 <span class="text-success" @click="slide_id = 1">Security</span></b>
+						</div>
+						<div class="hidden mb-5">
+							<h3><i class="fas fa-shield-virus fa-2x text-info"></i>假冒名義</h3>
+							<hr>
+							<p class="text-center text-md-left">係指犯罪者假冒公務機關等⾝份威脅被害⼈，讓被害⼈不敢反抗</p>
+							<b>請參考 <span class="text-info" @click="slide_id = 2">Firewall</span></b>
+						</div>
+					</div>
+					<div class="col-sm-2 text-md-right">
+						<div class="hidden2 mb-5">
+							<h3>詐騙款項<i class="fas fa-shield-virus fa-2x text-danger"></i></h3>
+							<hr>
+							<p class="text-center text-md-right">犯罪者向被害⼈借錢，之後被害⼈要求還錢時屢次找藉⼝拖延，甚⾄不予回應</p>
+							<b>請參考 <span class="text-danger" @click="slide_id = 0">Protection</span></b>
+						</div>
+						<div class="hidden2 mb-5">
+							<h3>偽稱買賣<i class="fas fa-shield-virus fa-2x text-success"></i></h3>
+							<hr>
+							<p class="text-center text-md-right">犯罪者利⽤媒體刊登不實廣告謊稱某物品具有良好功效吸引許多消費者訂購</p>
+							<b>請參考 <span class="text-success" @click="slide_id = 1">Security</span></b>
+						</div>
+						<div class="hidden2 mb-5">
+							<h3>投資詐欺<i class="fas fa-shield-virus fa-2x text-info"></i></h3>
+							<hr>
+							<p class="text-center text-md-right">犯罪者利⽤⺠眾想藉由投資股票等⽅式快速獲利的⼼理巧妙設計出的騙局</p>
+							<b>請參考 <span class="text-info" @click="slide_id = 2">Firewall</span></b>
+						</div>
+					</div>
+					<div class="col-sm-1"></div>
+				</div>
+			</div>
+		</section>
+		<section id="contact">
+			<div class="container-fluid">
+				<div class="row">
+					<div class="col-sm-5 body">
+						<div class="row">
+							<div class="col-sm-5 hidden">
+								<h3 class="st">網站資訊</h3>
+							</div>
+							<div class="col-sm-7 hidden">
+								<div class="st">
+									<a @click="alert('客服人員忙線中請稍後')"><i class="mr-3 fas fa-phone"></i>0912345678</a><br>
+									<a @click="alert('目前沒有網際網路請稍後')"><i
+											class="mr-3 fas fa-envelope"></i>12345@gmail.com</a><br>
+									<a @click="alert('Google Map搜尋中請稍後')"><i
+											class="mr-3 fas fa-building"></i>桃園市中壢區福星路</a><br>
+									<a @click="alert('歡迎加入我們，我們將不定期更新資訊')"><i class="mr-3 fab fa-facebook"></i></a>
+									<a @click="alert('歡迎訂閱我們，我們將不定期更新影片')"><i class="mr-3 fab fa-youtube"></i></a>
+									<a @click="alert('歡迎追蹤我們，我們將不定期更新貼文')"><i class="mr-3 fab fa-instagram"></i></a>
+								</div>
+							</div>
+						</div>
+						<form id="form" action="" class="hidden" @submit.prevent="alert2">
+							<h3 class="st">聯絡我們</h3>
+							<div class="input-group">
+								<span class="input-group-text border-0">姓名:</span>
+								<input type="text" class="form-control" v-model="guest" required>
+							</div>
+							<div class="input-group">
+								<span class="input-group-text border-0">連絡電話:</span>
+								<input type="text" class="form-control" v-model="phone" required>
+							</div>
+							<div class="input-group">
+								<span class="input-group-text border-0">電子信箱:</span>
+								<input type="email" class="form-control" v-model="email" required>
+							</div>
+							<select class="form-control" v-model="question" required>
+								<option value="郵件問題">郵件問題</option>
+								<option value="安全問題">安全問題</option>
+								<option value="防火牆問題">防火牆問題</option>
+								<option value="其他問題">其他問題</option>
+							</select>
+							<textarea rows="5" class="form-control" v-model="teatarea" required></textarea>
+							<div class="text-left text-md-right">
+								<button class="btn btn-outline-light mr-2" type="reset">清空</button>
+								<button class="btn btn-outline-light" type="submit">送出</button>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</section>
+		<footer class="text-center text-white bg-dark p-3">
+			&copy;2023 All Right Reserved. 本網站使用Bootstrap、Vue、HTML、CSS、PHP、MySQL等製作而成。
+		</footer>
+		<div class="modal fade" id="alert">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header bg-dark text-white">
+						<h5>本網站回應</h5><i class="fas fa-xmark" @click="$$('#alert').modal('hide')"></i>
+					</div>
+					<div class="modal-body">
+						<p>{{alert_msg}}</p>
+					</div>
+					<div class="modal-footer bg-warning">
+						<button class="btn btn-dark" @click="$$('#alert').modal('hide')">確認</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="login">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header bg-dark text-white">
+						<h5>會員登入</h5><i class="fas fa-xmark" @click="$$('#login').modal('hide')"></i>
+					</div>
+					<div class="modal-body">
+						<div class="input-group">
+							<span class="input-group-text">帳號:</span>
+							<input type="text" class="form-control" required v-model="account">
+						</div>
+						<div class="input-group">
+							<span class="input-group-text">密碼:</span>
+							<input type="password" class="form-control" required v-model="password">
+						</div>
+						<template v-if="loginInfo.name">
+							<hr>
+							歡迎{{loginInfo.name}}
+						</template>
+						<template v-else-if="loginInfo.insended">
+							<hr>
+							帳號或密碼錯誤
+						</template>
+					</div>
+					<div class="modal-footer bg-warning">
+						<button class="btn btn-outline-dark"
+							@click="$$('#login , #register').modal('toggle')">您還沒有帳號嗎?點我註冊</button>
+						<button class="btn btn-dark" @click="login">登入</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="register">
+			<div class="modal-dialog modal-dialog-centered">
+				<div class="modal-content">
+					<div class="modal-header bg-dark text-white">
+						<h5>會員註冊</h5><i class="fas fa-xmark" @click="$$('#register').modal('hide')"></i>
+					</div>
+					<div class="modal-body">
+						<div class="input-group">
+							<span class="input-group-text">帳號:</span>
+							<input type="text" class="form-control" required v-model="account">
+						</div>
+						<div class="input-group">
+							<span class="input-group-text">密碼:</span>
+							<input type="password" class="form-control" required v-model="password">
+						</div>
+						<div class="input-group">
+							<span class="input-group-text">使用者名稱:</span>
+							<input type="text" class="form-control" required v-model="name">
+						</div>
+						<template v-if="registerInfo.message">
+							<hr>
+							{{registerInfo.message}}
+						</template>
+					</div>
+					<div class="modal-footer bg-warning">
+						<button class="btn btn-outline-dark"
+							@click="$$('#register , #login').modal('toggle')">您有帳號了嗎?點我登入</button>
+						<button class="btn btn-dark" @click="register">註冊</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div class="modal fade" id="search">
+			<div class="modal-dialog modal-dialog-scrollable">
+				<div class="modal-content">
+					<div class="modal-header bg-dark text-white">
+						<h5>在本網站查詢</h5><i class="fas fa-xmark" @click="$$('#search').modal('hide')"></i>
+					</div>
+					<div class="modal-body">
+						<form class="input-group d-flex" @submit.prevent="$$('#search').modal()">
+							<input class="form-control mr-2" type="search" placeholder="搜尋關鍵字" aria-label="Search"
+								v-model="search_text">
+							<button class="btn btn-outline-warning" type="submit"><i class="fas fa-search"></i></button>
+						</form>
+						<hr>
+						<ol v-if="filter.length" style="padding: 1rem ; list-style: none">
+							<template v-for="i in filter">
+								<li v-if="i" @click="search(i)" style="cursor: pointer">
+									<h5>{{i.title}}</h5>
+									<hr>
+									<p style="white-space: nowrap;text-overflow: ellipsis;overflow: hidden">
+										{{i.content}}</p>
+								</li>
+							</template>
+						</ol>
+						<p class="tetx-center pt-3" v-else>查詢不到相關內容</p>
+					</div>
+					<div class="modal-footer bg-warning">
+						<button class="btn btn-dark" @click="$$('#search').modal('hide')">確認</button>
+					</div>
+				</div>
+			</div>
+		</div>
+		<div id="tool">
+			<a href="#top"><i class="fas fa-caret-up"></i></a>
+			<a @click="$$('#robot').fadeToggle()"><i class="fas fa-robot"></i></a>
+		</div>
+		<div id="robot" v-show="0">
+			<div class="card h-100">
+				<div class="card-header bg-dark text-center text-white">
+					<h5>反詐騙小助理</h5>
+				</div>
+				<div class="card-body">
+					<div class="content">
+						<div class="grid">
+							<button class="btn btn-outline-warning"
+								@click="$$('#text').val('關於我們');submit()">關於我們</button>
+							<button class="btn btn-outline-warning"
+								@click="$$('#text').val('資安健檢');submit()">資安健檢</button>
+							<button class="btn btn-outline-warning"
+								@click="$$('#text').val('會員註冊');submit()">會員註冊</button>
+							<button class="btn btn-outline-warning"
+								@click="$$('#text').val('聯絡我們');submit()">聯絡我們</button>
+						</div>
+						<div class="msg" v-for="i in messages" :class="i.who">{{i.text}}</div>
+						<div id="bottom"></div>
+					</div>
+				</div>
+				<form class="card-footer bg-warning iuput-group d-flex" @submit.prevent="submit">
+					<input type="text" class="form-control" id="text">
+					<button class="btn btn-dark"><i class="fas fa-paper-plane"></i></button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+	<script src="js/jquery-3.4.1.min.js"></script>
+
+	<!-- Include all compiled plugins (below), or include individual files as needed -->
+	<script src="js/popper.min.js"></script>
+	<script src="js/bootstrap-4.4.1.js"></script>
+</body>
+
+</html>
