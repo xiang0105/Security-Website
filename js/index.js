@@ -159,35 +159,57 @@ const app = createApp({
     login() {
       $.ajax({
         url: 'login.php',
-        data: {
+        method: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        data: JSON.stringify({
           account: this.account,
           password: this.password,
-        }
+        })
       }).then(data => {
         this.loginInfo = {
           insended: true,
-          name: data
+          name: data.success ? data.name : '',
+          message: data.message || ''
         };
         this.account = '';
+        this.password = '';
+      }).catch(xhr => {
+        const data = xhr.responseJSON || {};
+        this.loginInfo = {
+          insended: true,
+          name: '',
+          message: data.message || '帳號或密碼錯誤'
+        };
         this.password = '';
       })
     },
     register() {
       $.ajax({
         url: 'register.php',
-        data: {
+        method: 'POST',
+        contentType: 'application/json; charset=utf-8',
+        dataType: 'json',
+        data: JSON.stringify({
           account: this.account,
           password: this.password,
           name: this.name,
-        }
-      }).then(message => {
+        })
+      }).then(data => {
         this.registerInfo = {
           insended: true,
-          message
+          message: data.message
         };
         this.account = '';
         this.password = '';
         this.name = '';
+      }).catch(xhr => {
+        const data = xhr.responseJSON || {};
+        this.registerInfo = {
+          insended: true,
+          message: data.message || '註冊失敗，請稍後再試。'
+        };
+        this.password = '';
       })
     },
     submit() {

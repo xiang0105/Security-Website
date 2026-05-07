@@ -1,0 +1,15 @@
+Options -Indexes
+
+<FilesMatch "^(database|api|auth)\.php$">
+    Require all denied
+</FilesMatch>
+
+<FilesMatch "(\.log|dwsync\.xml|content\.txt)$">
+    Require all denied
+</FilesMatch>
+
+<IfModule mod_headers.c>
+    Header set X-Content-Type-Options "nosniff"
+    Header set X-Frame-Options "SAMEORIGIN"
+    Header set Referrer-Policy "same-origin"
+</IfModule>

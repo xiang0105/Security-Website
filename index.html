@@ -351,7 +351,7 @@
 			</div>
 		</section>
 		<footer class="text-center text-white bg-dark p-3">
-			&copy;2023 All Right Reserved. 本網站使用Bootstrap、Vue、HTML、CSS、PHP、MySQL等製作而成。
+			&copy;2023 All Right Reserved. 本網站使用Bootstrap、Vue、HTML、CSS、PHP、MySQL等製作而成。 MuXiang製作
 		</footer>
 		<div class="modal fade" id="alert">
 			<div class="modal-dialog modal-dialog-centered">
@@ -389,7 +389,7 @@
 						</template>
 						<template v-else-if="loginInfo.insended">
 							<hr>
-							帳號或密碼錯誤
+							{{loginInfo.message || '帳號或密碼錯誤'}}
 						</template>
 					</div>
 					<div class="modal-footer bg-warning">

@@ -1,70 +1,91 @@
-# 111 全國技藝競賽 — 網頁作品
+# 全台資安防護網
 
-本專案為參加 **111 年全國技藝競賽** 的網站作品，採用 **Bootstrap、Vue.js、jQuery** 等技術開發，並結合 PHP 實作登入與註冊功能。整體架構清晰，包含前端版面、互動效果與基本會員系統。
+全台資安防護網是一個以資安宣導、服務介紹與會員互動為主題的網站作品。頁面使用 Bootstrap、Vue.js 與 jQuery 製作響應式介面，後端以 PHP 提供會員註冊與登入 API，資料庫預設連接本機 XAMPP 的 MySQL。
 
-## 專案特色
+## 網站功能
 
-- 使用 **Bootstrap** 建立完整 RWD 響應式版面  
-- 使用 **Vue.js** 進行前端資料綁定與互動  
-- 使用 **jQuery** 處理 DOM、事件與 AJAX  
-- 具備 **登入 / 註冊** 的基本會員系統  
-- 前後端分離度高，結構清晰易維護  
+- 首頁輪播與資安數據展示
+- 資安議題、服務方案與聯絡資訊區塊
+- 站內搜尋視窗與簡易互動客服
+- 會員註冊與登入
+- PHP + MySQL 後端 API
+
+## 技術架構
+
+- 前端：HTML5、CSS3、Bootstrap 4、Vue.js、jQuery
+- 後端：PHP、PDO
+- 資料庫：XAMPP MySQL / MariaDB
+- 圖示與素材：Font Awesome、本機圖片資源
 
 ## 專案結構
 
+```text
+.
+├── css/                 # 樣式與 Bootstrap
+├── images/              # 圖片資源
+├── img/                 # Logo、icon、頁面圖片
+├── js/                  # Vue、jQuery 與網站互動程式
+├── index.html           # 網站主頁
+├── api.php              # API 共用工具與安全回應
+├── auth.php             # 自動判斷 XAMPP / Supabase 的會員資料來源
+├── database.php         # XAMPP MySQL PDO 連線設定
+├── login.php            # 會員登入 API
+├── register.php         # 會員註冊 API
+├── .htaccess            # Apache 基礎安全設定
+└── SUPABASE_MIGRATION.md
 ```
-├── _notes/ # 編輯器產生的設定資料，可忽略
-├── css/ # 樣式（包含 Bootstrap 與自訂 CSS）
-├── images/ # 頁面用圖片（banner、海報等）
-├── img/ # icon、小圖示
-├── js/ # JavaScript / Vue / jQuery 程式碼
-│
-├── index.html # 主首頁，整合 Bootstrap + Vue + jQuery
-├── login.php # 會員登入功能
-├── register.php # 會員註冊功能
-├── content.txt # 文字或簡易資料來源
-└── README.md # 說明文件
+
+## 本機執行
+
+1. 啟動 XAMPP 的 Apache 與 MySQL。
+2. 將專案放在 XAMPP 的 `htdocs` 目錄，或設定 Apache VirtualHost 指向本專案。
+3. 建立資料庫與資料表：
+
+```sql
+CREATE DATABASE IF NOT EXISTS test CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
+USE test;
+
+CREATE TABLE IF NOT EXISTS `user` (
+  account VARCHAR(32) NOT NULL PRIMARY KEY,
+  password VARCHAR(255) NOT NULL,
+  name VARCHAR(40) NOT NULL,
+  created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+) CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 ```
 
-## 使用技術
+4. 開啟 `http://localhost/專案資料夾名稱/index.html`。
 
-### Front-End
-- HTML5 / CSS3 / JavaScript
-- **Bootstrap**（排版、元件、RWD）
-- **Vue.js**（資料綁定、互動邏輯）
-- **jQuery**（DOM、事件、AJAX）
+## 資安優化
 
-### Back-End
-- **PHP**（處理登入與註冊）
-- 簡易檔案儲存（TXT）
+- 使用 PDO prepared statement，避免 SQL injection。
+- API 僅允許 POST，避免帳號密碼出現在網址與伺服器紀錄。
+- 註冊密碼使用 `password_hash()` 雜湊儲存。
+- 舊明文密碼在成功登入後會自動升級為雜湊。
+- 統一 JSON 回應，避免將例外細節直接顯示給使用者。
+- 加入輸入長度、帳號格式與密碼長度檢查。
+- Apache 停用目錄索引，並阻擋共用 PHP、log、Dreamweaver sync 檔直接下載。
 
-### Tools
-- GitHub
-- VS Code / Dreamweaver
+## 資料庫設定與自動切換
 
-## 功能說明
+網站前端固定呼叫 `login.php` 與 `register.php`，後端會依環境變數自動選擇資料來源。
 
-### 首頁（index.html）
-- RWD 版面
-- 圖片展示區塊
-- JS / Vue 整合互動效果
+沒有設定 Supabase 金鑰時，使用本機 XAMPP MySQL：
 
-### 註冊（register.php）
-- 表單格式驗證  
-- 輸入後寫入資料（TXT 或其他方式）
+```text
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_NAME=test
+DB_USER=root
+DB_PASS=
+```
 
-### 登入（login.php）
-- 讀取資料驗證帳密  
-- 可搭配 PHP Session（若有實作）
+有設定 `SUPABASE_URL` 且有任一 Supabase 金鑰時，改用 Supabase Auth：
 
-### 結構模組化
-- css / js / images 分類完整  
-- 前端與後端檔案清晰分工  
+```text
+SUPABASE_URL=https://YOUR_PROJECT_ID.supabase.co
+SUPABASE_KEY=YOUR_SUPABASE_PUBLISHABLE_OR_ANON_KEY
+```
 
-## 部署方式
+也可以使用 `SUPABASE_ANON_KEY` 或 `SUPABASE_PUBLISHABLE_KEY`。變數存在時會優先使用 Supabase，不需要修改前端程式。
 
-1. 將整個專案放入伺服器或本機環境（如 XAMPP）。
-
-
-
-
+Supabase 模式會把原本的 `account` 當作 Email 使用；XAMPP 模式則維持原本的帳號格式。
